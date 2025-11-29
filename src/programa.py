@@ -8,12 +8,13 @@ def limpiar_consola():
     while n < 50:
         print(" \n")
         n += 1
-# Funcion auxiliar de pausa:
 
+# Funcion auxiliar de pausa:
 def pausar():
     """Pausa hasta que el usuario pulse una tecla."""
     input("\nPresione una tecla para continuar . . . ")
-# Funciones que te pide:
+
+# Funciones principales:
 def mostrar_datos(datos):
     """
     Recibe un diccionario (lo esperado: {'usuarios': [...]})
@@ -68,4 +69,32 @@ def inicializar_datos(archivo_origen, archivo_destino):
         print(f"ERROR al copiar el archivo: {e}")
         return False
 
-# Funciones extras para estructurar el codigo:
+# Funcion para cargar json y funcion para guardarlo:
+def cargar_json(ruta):
+    """Carga JSON desde un archivo y devuelve el diccionario (o None si error)."""
+    path = Path(ruta)
+    if not path.exists():
+        print(f"ERROR: El archivo '{ruta}' no existe.")
+        return None
+    try:
+        with path.open('r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        print(f"ERROR: El archivo '{ruta}' tiene JSON inválido.")
+        return None
+    except Exception as e:
+        print(f"ERROR al leer '{ruta}': {e}")
+        return None
+    
+def guardar_json(ruta, datos):
+    """Guarda el diccionario 'datos' como JSON en 'ruta'."""
+    try:
+        with open(ruta, 'w', encoding='utf-8') as f:
+            json.dump(datos, f, ensure_ascii=False, indent=4)
+        return True
+    except Exception as e:
+        print(f"ERROR al guardar en '{ruta}': {e}")
+        return False
+
+# Funciones para: actualizar edad, insertar usuario y eliminar usuario
+
