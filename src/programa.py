@@ -97,4 +97,44 @@ def guardar_json(ruta, datos):
         return False
 
 # Funciones para: actualizar edad, insertar usuario y eliminar usuario
+def actualizar_edad(datos, id_usuario, nueva_edad):
+    usuarios = datos.get("usuarios", [])
+    for u in usuarios:
+        if u.get("id") == id_usuario:
+            u["edad"] = nueva_edad
+            print(f"Usuario con ID {id_usuario} actualizado.")
+            return True
+    print(f"ERROR: Usuario con ID {id_usuario} no encontrado.")
+    return False
+
+def insertar_usuario(datos, nombre, edad):
+    usuarios = datos.get("usuarios")
+    if usuarios is None:
+        usuarios = []
+        datos["usuarios"] = usuarios
+    # calcular nuevo id (1 + máximo id existente)
+    max_id = 0
+    for u in usuarios:
+        try:
+            if int(u.get("id", 0)) > max_id:
+                max_id = int(u.get("id", 0))
+        except Exception:
+            pass
+    nuevo_id = max_id + 1
+    nuevo_usuario = {"id": nuevo_id, "nombre": nombre, "edad": edad}
+    usuarios.append(nuevo_usuario)
+    print(f"Usuario {nombre} añadido con éxito.")
+    return True
+
+def eliminar_usuario(datos, id_usuario):
+    usuarios = datos.get("usuarios", [])
+    nueva_lista = [u for u in usuarios if u.get("id") != id_usuario]
+    if len(nueva_lista) == len(usuarios):
+        print(f"ERROR: Usuario con ID {id_usuario} no encontrado.")
+        return False
+    datos["usuarios"] = nueva_lista
+    print(f"Usuario con ID {id_usuario} eliminado.")
+    return True
+
+# Funcion Main
 
