@@ -58,5 +58,30 @@ def inicializar_datos(archivo_origen, archivo_destino):
     shutil.copy(archivo_origen, archivo_destino)
     print(f"Datos inicializados desde '{archivo_origen}' a '{archivo_destino}'.")
 
+# Funciones cargar y guardar y crear
+def cargar_xml(archivo):
+    """
+    Carga un archivo XML. Si hay errores, devuelve (None, None).
+    """
+    try:
+        tree = ET.parse(archivo)
+        root = tree.getroot()
+        return tree, root
+    except (FileNotFoundError, ET.ParseError):
+        return None, None
 
-# Funciones cargar y guardar
+
+def guardar_xml(arbol, archivo):
+    """
+    Guarda el árbol XML en el archivo indicado.
+    """
+    arbol.write(archivo, encoding="utf-8", xml_declaration=True)
+
+def crear_arbol(nombre_raiz):
+    """
+    Crea un nuevo árbol XML con un nodo raíz dado.
+    """
+    raiz = ET.Element(nombre_raiz)
+    return ET.ElementTree(raiz)
+
+
