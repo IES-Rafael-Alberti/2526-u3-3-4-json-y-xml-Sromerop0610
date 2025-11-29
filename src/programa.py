@@ -137,4 +137,46 @@ def eliminar_usuario(datos, id_usuario):
     return True
 
 # Funcion Main
+def main():
+    origen = "datos_usuarios_orig.json"
+    destino = "datos_usuarios.json"
+
+    limpiar_consola()
+
+    # 1) Inicializar datos (copiar origen -> destino)
+    inicializar_datos(origen, destino)
+
+    # 2) Cargar datos desde destino
+    datos = cargar_json(destino)
+    if datos is None:
+        # Si no se pudo cargar, creamos estructura vacía para seguir pruebas
+        datos = {"usuarios": []}
+
+    # 3) Mostrar contenido inicial
+    mostrar_datos(datos)
+    pausar()
+
+    # 4) Actualizar la edad de un usuario (ej: ID 1 -> edad +1)
+    actualizar_edad(datos, 1, 31)  # según enunciado: Juan de 30 a 31
+    mostrar_datos(datos)
+    pausar()
+
+    # 5) Insertar nuevo usuario (ej: Pedro, 40)
+    insertar_usuario(datos, "Pedro", 40)
+    mostrar_datos(datos)
+    pausar()
+
+    # 6) Eliminar usuario con ID 2 (Ana)
+    eliminar_usuario(datos, 2)
+    mostrar_datos(datos)
+    pausar()
+
+    # 7) Guardar cambios en destino
+    if guardar_json(destino, datos):
+        print("\nOperaciones completadas. Archivo actualizado.")
+    else:
+        print("\nNo se pudieron guardar los cambios.")
+
+if __name__ == "__main__":
+    main()
 
