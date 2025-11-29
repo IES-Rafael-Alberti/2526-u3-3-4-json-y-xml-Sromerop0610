@@ -84,4 +84,55 @@ def crear_arbol(nombre_raiz):
     raiz = ET.Element(nombre_raiz)
     return ET.ElementTree(raiz)
 
+# Funciones para modificar datos
+def actualizar_edad(root, id_usuario, nueva_edad):
+    """
+    Actualiza la edad del usuario con el ID dado.
+    """
+    for usuario in root.findall("usuario"):
+        if usuario.find("id").text == str(id_usuario):
+            usuario.find("edad").text = str(nueva_edad)
+            print(f"Usuario con ID {id_usuario} actualizado.")
+            return
+    print(f"ERROR El usuario con ID {id_usuario} no existe.")
 
+
+def insertar_usuario(root, nombre, edad):
+    """
+    Inserta un nuevo usuario con ID consecutivo.
+    """
+    usuarios = root.findall("usuario")
+
+    if usuarios:
+        ultimo_id = max(int(u.find("id").text) for u in usuarios)
+    else:
+        ultimo_id = 0
+
+    nuevo_id = ultimo_id + 1
+
+    nuevo_usuario = ET.Element("usuario")
+    
+    id_elem = ET.SubElement(nuevo_usuario, "id")
+    id_elem.text = str(nuevo_id)
+
+    nombre_elem = ET.SubElement(nuevo_usuario, "nombre")
+    nombre_elem.text = nombre
+
+    edad_elem = ET.SubElement(nuevo_usuario, "edad")
+    edad_elem.text = str(edad)
+
+    root.append(nuevo_usuario)
+
+    print(f"Usuario {nombre} añadido con éxito.")
+
+
+def eliminar_usuario(root, id_usuario):
+    """
+    Elimina el usuario con el ID dado.
+    """
+    for usuario in root.findall("usuario"):
+        if usuario.find("id").text == str(id_usuario):
+            root.remove(usuario)
+            print(f"Usuario con ID {id_usuario} eliminado.")
+            return
+    print(f"ERROR El usuario con ID {id_usuario} no existe.")
