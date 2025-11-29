@@ -136,3 +136,48 @@ def eliminar_usuario(root, id_usuario):
             print(f"Usuario con ID {id_usuario} eliminado.")
             return
     print(f"ERROR El usuario con ID {id_usuario} no existe.")
+
+# Funcion Main
+def main():
+    limpiar_consola()
+
+    archivo_origen = "datos_usuarios_orig.xml"
+    archivo_destino = "datos_usuarios.xml"
+
+    # 1. Inicializar datos
+    inicializar_datos(archivo_origen, archivo_destino)
+
+    # 2. Cargar XML
+    arbol, root = cargar_xml(archivo_destino)
+
+    # Si no se puede cargar → crear árbol vacío
+    if root is None:
+        arbol = crear_arbol("usuarios")
+        root = arbol.getroot()
+
+    # 3. Mostrar datos iniciales
+    mostrar_datos(root)
+    pausa()
+
+    # 4. Actualizar edad usuario ID=1
+    actualizar_edad(root, 1, 31)
+    mostrar_datos(root)
+    pausa()
+
+    # 5. Insertar nuevo usuario
+    insertar_usuario(root, "Pedro", 40)
+    mostrar_datos(root)
+    pausa()
+
+    # 6. Eliminar usuario ID=2
+    eliminar_usuario(root, 2)
+    mostrar_datos(root)
+    pausa()
+
+    # 7. Guardar resultado final
+    guardar_xml(arbol, archivo_destino)
+    print("Operaciones completadas. Archivo actualizado.")
+
+
+if __name__ == "__main__":
+    main()
