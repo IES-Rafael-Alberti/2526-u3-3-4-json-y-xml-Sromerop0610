@@ -1,91 +1,231 @@
 # Práctica 3.4: JSON y XML
 
-Apoyate en los siguientes recursos para realizar la práctica:
+Apóyate en los siguientes recursos para realizar la práctica:
 
-[U3: JSON](https://revilofe.github.io/section1/u03/practica/PROG-U3.-Practica004/)
-[U3: XML](https://revilofe.github.io/section1/u03/practica/PROG-U3.-Practica005/)
-
-
-## Ejercicios. 
-Cada ejercicio en un archivo diferente.
-
-## Entrega
-1. Agregar en la carpeta `src` los programas (json.py, xml.py)
-2. Las pruebas unitarias en la carpeta `tests`
-3. Mas abajo tienes un ejemplo de como entregar la práctica.
-4. Recuerda que debes subir el enlace al repositorio en la tarea correspondiente del aula virtual.
-
+* U3: JSON
+* U3: XML
 
 ---
 
 # Título de la Actividad
 
-## Identificación de la Actividad
-- **ID de la Actividad:** [ID de la actividad]
-- **Módulo:** [Nombre del módulo] (`PROG`, `IS`, `EDES`, etc.)
-- **Unidad de Trabajo:** [Número y nombre de la unidad de trabajo]
-- **Fecha de Creación:** [Fecha de creación]
-- **Fecha de Entrega:** [Fecha de entrega]
-- **Alumno(s):** 
-  - **Nombre y Apellidos:** [Nombre y Apellidos del alumno o integrantes del grupo]
-  - **Correo electrónico:** [Correo electrónico g.educaand.es]
-  - **Iniciales del Alumno/Grupo:** [Iniciales del alumno o del grupo]
+Práctica 3.4 — Gestión de Usuarios con JSON y XML
 
-## Descripción de la Actividad
-[Descripción detallada de la actividad, objetivos, y contexto necesario para comprenderla. Explicar en qué consiste la actividad y qué se espera que el alumno desarrolle o implemente.]
+---
 
-## Instrucciones de Compilación y Ejecución
-1. **Requisitos Previos:**
-   - [Lenguaje de programación y versión]
-   - [Entorno de desarrollo o dependencias necesarias]
+# Identificación de la Actividad
 
-2. **Pasos para Compilar el Código:**
-   ```bash
-   [Comando para compilar el código]
-   ```
+* **ID de la Actividad:** P3.4
+* **Módulo:** PROG
+* **Unidad de Trabajo:** Unidad 3 — Manejo de Ficheros (JSON y XML)
+* **Fecha de Creación:** 28/11/2025
+* **Fecha de Entrega:** 29/11/2025
 
-3. **Pasos para Ejecutar el Código:**
-   ```bash
-   [Comando para ejecutar la aplicación]
-   ```
+**Alumno:**
 
-4. **Ejecución de Pruebas:**
-   ```bash
-   [Comandos para ejecutar pruebas, si las hubiera]
-   ```
+* **Nombre y Apellidos:** Sara Romero Peralta
+* **Correo electrónico:** [sromper0610@g.educaand.es](mailto:sromper0610@g.educaand.es)
+* **Iniciales:** SRP
 
-## Desarrollo de la Actividad
-### Descripción del Desarrollo
-[Explicación de cómo se ha abordado el desarrollo de la actividad, incluyendo las decisiones de diseño, estructura del código y enfoque de resolución de problemas. Se recomienda adjuntar diagramas o capturas de pantalla si es necesario.]
-Los enlaces al codigo se realizaran tal y como se describe [aqui](https://docs.github.com/es/get-started/writing-on-github/working-with-advanced-formatting/creating-a-permanent-link-to-a-code-snippet)
+---
 
+# Descripción de la Actividad
 
-### Código Fuente
-[Aquí se incluirá un enlace directo a los archivos de código fuente en el repositorio, por ejemplo, si se está usando GitHub: `src/main.java` o algún enlace directo.]
+Esta práctica está compuesta por tres ejercicios independientes:
 
-### Ejemplos de Ejecución
-- **Entrada 1:** Descripción de la entrada y valor de prueba.
-- **Salida Esperada 1:** Explicación de la salida esperada y el resultado de la prueba.
+### **Ejercicio 1 — json.py**
 
-### Resultados de Pruebas
-[Aquí se detallará cómo se ha verificado la funcionalidad del código, incluyendo resultados de pruebas automatizadas o manuales, en caso de que las haya.]
+Miniaplicación que gestiona usuarios almacenados en un fichero JSON. Debe copiar un archivo origen, mostrar los datos, modificar usuarios, insertar nuevos, eliminar existentes y guardar los cambios.
 
-## Documentación Adicional
-- **Manual de Usuario:** [Enlace a la documentación del usuario, si existe]
-- **Autorización de Permisos:** Verificar que el profesor tenga permisos de lectura en el repositorio para revisar el código.
+### **Ejercicio 2 — xml.py**
 
-## Conclusiones
-[Resumen de las conclusiones alcanzadas al desarrollar la actividad, las lecciones aprendidas, y posibles mejoras que se puedan implementar en futuras entregas.]
+Miniaplicación equivalente al ejercicio JSON, pero trabajando con archivos XML y gestionando nodos mediante `xml.etree.ElementTree`.
 
-## Referencias y Fuentes
-[Aquí se listarán las fuentes consultadas para el desarrollo de la actividad, tales como documentación oficial, artículos, o cualquier recurso externo relevante.]
+### **Ejercicio 3 — examen.py**
 
-### Notas Adicionales:
-1. **Nombres de Archivos y Repositorios:**
-   - Asegúrate de que el nombre del archivo o repositorio siga la estructura definida: `XXX-idActividad-Iniciales`.
-2. **Permisos:**
-   - Verifica que el profesor tenga los permisos necesarios para acceder al repositorio o documento.
-3. **Formato:**
-   - Si se entrega en formato PDF o Google Docs, asegúrate de cumplir con el mínimo y máximo de folios establecidos.
-4. **Compilación y Ejecución:**
-   - Detalla claramente cómo compilar y ejecutar el código, incluyendo las instrucciones en el archivo `README.md`.
+Programa sencillo indicado verbalmente por el profesor. Contiene un diccionario con datos de una persona y realiza:
+
+1. Mostrar datos actuales
+2. Modificar valores del diccionario
+3. Añadir claves nuevas
+4. Eliminar claves
+5. Volver a mostrar el diccionario resultante
+
+Los tres programas deben funcionar de forma independiente y cumplir el flujo de ejecución solicitado.
+
+---
+
+# Instrucciones de Compilación y Ejecución
+
+## Requisitos Previos
+
+* Python 3.10+
+* Editor recomendado: VS Code o PyCharm
+* No requiere librerías externas.
+
+## Ejecutar cada ejercicio
+
+### Ejecutar JSON:
+
+```
+python src/json.py
+```
+
+### Ejecutar XML:
+
+```
+python src/xml.py
+```
+
+### Ejecutar el Ejercicio 3:
+
+```
+python src/json_a_xml.py
+```
+
+---
+
+# Desarrollo de la Actividad
+
+## Descripción del Desarrollo
+
+Los tres programas se han desarrollado en Python utilizando estructura modular y funciones claramente diferenciadas.
+
+---
+
+## Ejercicio 1: json.py
+
+Se implementaron funciones para:
+
+* `inicializar_datos()`: copia el archivo original y gestiona errores
+* `cargar_json()` y `guardar_json()`: lectura y escritura del fichero
+* `mostrar_datos()`: muestra todos los usuarios
+* Gestión de usuarios:
+
+  * `actualizar_usuario()`
+  * `insertar_usuario()`
+  * `eliminar_usuario()`
+
+El `main()` realiza todas las operaciones en el orden pedido por el profesor.
+
+---
+
+## Ejercicio 2: xml.py
+
+Funciones desarrolladas:
+
+* `inicializar_datos()`: copia el XML origen
+* `cargar_xml()`: lectura segura, detecta corrupción
+* `crear_arbol()`: genera estructura válida si el archivo está dañado
+* `mostrar_datos()`: imprime nodos `<usuario>`
+* Gestión mediante ElementTree:
+
+  * `actualizar_edad()`
+  * `insertar_usuario()`
+  * `eliminar_usuario()`
+
+Se reprodujo el flujo indicado en el enunciado, incluyendo limpieza de consola y pausas.
+
+---
+
+## Ejercicio 3: examen.py
+
+Este ejercicio contiene un diccionario denominado `persona = {"nombre": "...", "edad": ..., "curso": "..."}`.
+
+El programa implementa:
+
+* Mostrar los datos iniciales
+* Cambiar valores de claves existentes
+* Añadir nuevas claves
+* Eliminar claves
+* Mostrar el diccionario final
+
+Es un programa directo, sin uso de archivos, pero forma parte oficial de la entrega.
+
+---
+
+# Enlaces al Código
+[Ejercicios](src)
+---
+
+# Ejemplos de Ejecución
+
+## JSON (resumen)
+
+```
+Datos inicializados desde 'datos_usuarios_orig.json' a 'datos_usuarios.json'.
+
+--- Contenido Actual del JSON ---
+ID: 1, Nombre: Juan, Edad: 30
+ID: 2, Nombre: Ana, Edad: 25
+--- Fin del Contenido ---
+```
+
+## XML (resumen)
+
+```
+Datos inicializados desde 'datos_usuarios_orig.xml' a 'datos_usuarios.xml'.
+
+--- Contenido Actual del XML ---
+ID: 1, Nombre: Juan, Edad: 30
+ID: 2, Nombre: Ana, Edad: 25
+--- Fin del Contenido ---
+```
+
+## Ejercicio 3 (resumen)
+
+```
+Datos actuales:
+{'nombre': 'Sara', 'edad': 19, 'curso': '1ºDAM'}
+
+Modificando edad...
+Añadiendo clave nueva...
+
+Diccionario final:
+{'nombre': 'Sara', 'edad': 20, 'curso': '1ºDAM', 'telefono': '123456789'}
+```
+
+---
+
+# Resultados de Pruebas
+
+Las pruebas realizadas verifican:
+
+* Manejo de errores en archivos inexistentes
+* Detección de JSON o XML corruptos
+* Actualización correcta de datos
+* Inserción con ID correcto
+* Eliminación segura de entradas
+* Recreación de XML vacío cuando corresponde
+
+---
+
+# Documentación Adicional
+
+* Manual de usuario: No necesario
+* El profesor debe tener permisos de lectura en el repositorio
+
+---
+
+# Conclusiones
+
+La práctica ha permitido comprender:
+
+* Lectura y escritura de datos en JSON
+* Manipulación de árboles XML con ElementTree
+* Diseño modular usando funciones
+* Aplicación de flujos de trabajo típicos de CRUD
+* Manejo de excepciones y archivos corruptos
+
+Se podrían implementar mejoras como menús interactivos, validación adicional y persistencia avanzada.
+
+---
+
+# Referencias y Fuentes
+
+* Documentación oficial de Python:
+  json
+  xml.etree.ElementTree
+* Material de clase
+* Ejemplos mostrados en el aula
+
