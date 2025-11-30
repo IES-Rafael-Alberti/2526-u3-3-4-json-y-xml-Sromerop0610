@@ -14,7 +14,7 @@ def pausar():
     """Pausa hasta que el usuario pulse una tecla."""
     input("\nPresione una tecla para continuar . . . ")
 
-# Funciones principales:
+# Funciones principalesa implementar:
 def mostrar_datos(datos):
     """
     Recibe un diccionario (lo esperado: {'usuarios': [...]})
@@ -69,114 +69,102 @@ def inicializar_datos(archivo_origen, archivo_destino):
         print(f"ERROR al copiar el archivo: {e}")
         return False
 
-# Funcion para cargar json y funcion para guardarlo:
-def cargar_json(ruta):
-    """Carga JSON desde un archivo y devuelve el diccionario (o None si error)."""
-    path = Path(ruta)
-    if not path.exists():
-        print(f"ERROR: El archivo '{ruta}' no existe.")
-        return None
+# Funciones ya dadas (cargar y guardar)
+def cargar_json(nombre_fichero: str) -> dict:
     try:
-        with path.open('r', encoding='utf-8') as f:
-            return json.load(f)
+        with open(nombre_fichero, "r") as archivo:
+            return json.load(archivo)
+
+    except FileNotFoundError:
+        print(f"*ERROR* El archivo {nombre_fichero} no existe.")
+
     except json.JSONDecodeError:
-        print(f"ERROR: El archivo '{ruta}' tiene JSON inválido.")
-        return None
+        print("*ERROR* El archivo JSON tiene un formato incorrecto.")
+
     except Exception as e:
-        print(f"ERROR al leer '{ruta}': {e}")
-        return None
-    
-def guardar_json(ruta, datos):
-    """Guarda el diccionario 'datos' como JSON en 'ruta'."""
+        print(f"*ERROR* Problemas al cargar los datos {e}.")
+
+    return None
+
+
+def guardar_json(nombre_fichero: str, datos: dict):
     try:
-        with open(ruta, 'w', encoding='utf-8') as f:
-            json.dump(datos, f, ensure_ascii=False, indent=4)
-        return True
+        with open(nombre_fichero, "w") as archivo:
+            json.dump(datos, archivo, indent=4)
+
+    except PermissionError:
+        print(f"*ERROR* No tienes permisos para escribir en el archivo '{nombre_fichero}'.")
+
+    except TypeError as e:
+        print(f"*ERROR* Los datos no son serializables a JSON. Detalle: {e}")
+
     except Exception as e:
-        print(f"ERROR al guardar en '{ruta}': {e}")
-        return False
+        print(f"*ERROR* Problemas al guardar los datos: {e}")
 
-# Funciones para: actualizar edad, insertar usuario y eliminar usuario
-def actualizar_edad(datos, id_usuario, nueva_edad):
-    usuarios = datos.get("usuarios", [])
-    for u in usuarios:
-        if u.get("id") == id_usuario:
-            u["edad"] = nueva_edad
-            print(f"Usuario con ID {id_usuario} actualizado.")
-            return True
-    print(f"ERROR: Usuario con ID {id_usuario} no encontrado.")
-    return False
+# Funciones para: actualizar edad, insertar usuario y eliminar usuario (ya dadas)
+def actualizar_usuario(datos: dict, id_usuario: int, nueva_edad: int):
+    for usuario in datos["usuarios"]:
+        if usuario["id"] == id_usuario:
+            usuario["edad"] = nueva_edad
+            print(f"\nUsuario con ID {id_usuario} actualizado.")
+            return
+    print(f"\nUsuario con ID {id_usuario} no encontrado.")
 
-def insertar_usuario(datos, nombre, edad):
-    usuarios = datos.get("usuarios")
-    if usuarios is None:
-        usuarios = []
-        datos["usuarios"] = usuarios
-    # calcular nuevo id (1 + máximo id existente)
-    max_id = 0
-    for u in usuarios:
-        try:
-            if int(u.get("id", 0)) > max_id:
-                max_id = int(u.get("id", 0))
-        except Exception:
-            pass
-    nuevo_id = max_id + 1
-    nuevo_usuario = {"id": nuevo_id, "nombre": nombre, "edad": edad}
-    usuarios.append(nuevo_usuario)
-    print(f"Usuario {nombre} añadido con éxito.")
-    return True
 
-def eliminar_usuario(datos, id_usuario):
-    usuarios = datos.get("usuarios", [])
-    nueva_lista = [u for u in usuarios if u.get("id") != id_usuario]
-    if len(nueva_lista) == len(usuarios):
-        print(f"ERROR: Usuario con ID {id_usuario} no encontrado.")
-        return False
-    datos["usuarios"] = nueva_lista
-    print(f"Usuario con ID {id_usuario} eliminado.")
-    return True
+def insertar_usuario(datos: dict, nuevo_usuario: dict):
+    datos["usuarios"].append(nuevo_usuario)
+    print(f"\nUsuario {nuevo_usuario['nombre']} añadido con éxito.")
+
+
+def eliminar_usuario(datos: dict, id_usuario: int):
+    for usuario in datos["usuarios"]:
+        if usuario["id"] == id_usuario:
+            datos["usuarios"].remove(usuario)
+            print(f"\nUsuario con ID {id_usuario} eliminado.")
+            return
+    print(f"\nUsuario con ID {id_usuario} no encontrado.")
+
 
 # Funcion Main
 def main():
-    origen = "datos_usuarios_orig.json"
-    destino = "datos_usuarios.json"
-
     limpiar_consola()
 
-    # 1) Inicializar datos (copiar origen -> destino)
-    inicializar_datos(origen, destino)
+    archivo_origen = "src/otros/datos_usuarios_orig.json"
+    archivo_destino = "src/otros/datos_usuarios.json"
 
-    # 2) Cargar datos desde destino
-    datos = cargar_json(destino)
+    # 1. Inicializar datos
+    inicializar_datos(archivo_origen, archivo_destino)
+
+    # 2. Cargar datos
+    datos = cargar_json(archivo_destino)
     if datos is None:
-        # Si no se pudo cargar, creamos estructura vacía para seguir pruebas
         datos = {"usuarios": []}
 
-    # 3) Mostrar contenido inicial
+    # 3. Mostrar contenido inicial
     mostrar_datos(datos)
     pausar()
 
-    # 4) Actualizar la edad de un usuario (ej: ID 1 -> edad +1)
-    actualizar_edad(datos, 1, 31)  # según enunciado: Juan de 30 a 31
+    # 4. ACTUALIZAR USUARIO
+    actualizar_usuario(datos, id_usuario=1, nueva_edad=31)
     mostrar_datos(datos)
     pausar()
 
-    # 5) Insertar nuevo usuario (ej: Pedro, 40)
-    insertar_usuario(datos, "Pedro", 40)
+    # 5. INSERTAR USUARIO
+    nuevo_usuario = {"id": 3, "nombre": "Pedro", "edad": 40}
+    insertar_usuario(datos, nuevo_usuario)
     mostrar_datos(datos)
     pausar()
 
-    # 6) Eliminar usuario con ID 2 (Ana)
-    eliminar_usuario(datos, 2)
+    # 6. ELIMINAR USUARIO
+    eliminar_usuario(datos, id_usuario=2)
     mostrar_datos(datos)
     pausar()
 
-    # 7) Guardar cambios en destino
-    if guardar_json(destino, datos):
-        print("\nOperaciones completadas. Archivo actualizado.")
-    else:
-        print("\nNo se pudieron guardar los cambios.")
+    # 7. GUARDAR CAMBIOS
+    guardar_json(archivo_destino, datos)
+
+    print("\nOperaciones completadas. Archivo actualizado.\n")
+
 
 if __name__ == "__main__":
     main()
-
